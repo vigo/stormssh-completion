@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-__storm(){
+__stormssh(){
     local cur prev options storm_command
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    __storm_get_command
+    __stormssh_get_command
     if [[ $cur = -* ]]; then
         if [[ -z $storm_command ]]; then
             options="$options -v --version -h --help"
@@ -48,7 +48,7 @@ __storm(){
     fi
     COMPREPLY=($(compgen -W "$options" -- "$cur"))
 }
-__storm_get_command(){
+__stormssh_get_command(){
     local i
     for ((i=1; i < $COMP_CWORD; ++i)); do
         local arg=${COMP_WORDS[$i]}
@@ -65,4 +65,4 @@ __storm_get_command(){
         esac
     done
 }
-complete -F __storm -o bashdefault -o default storm
+complete -F __stormssh -o bashdefault -o default storm
